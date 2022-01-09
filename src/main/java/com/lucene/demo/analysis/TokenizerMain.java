@@ -1,0 +1,27 @@
+package com.lucene.demo.analysis;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+
+public class TokenizerMain {
+    public static void main(String[] args) throws IOException {
+        String term = "Hello Everyone";
+
+        StandardTokenizer tokenizer = new StandardTokenizer();
+        tokenizer.setReader(new StringReader(term));
+        CharTermAttribute attr = tokenizer.addAttribute(CharTermAttribute.class);
+
+        try {
+            tokenizer.reset();
+            while (tokenizer.incrementToken()) {
+                // System.out.println("token: " + tokenizer.reflectAsString(true));
+                System.out.println(attr.toString());
+            }
+        } finally {
+            tokenizer.close();
+        }
+    }
+}
