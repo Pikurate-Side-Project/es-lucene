@@ -1,0 +1,19 @@
+apply plugin: "application"
+
+sourceCompatibility = 17
+targetCompatibility = 17
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.apache.lucene:lucene-core:8.9.0"
+    implementation "org.apache.lucene:lucene-analyzers-common:8.9.0"
+}
+
+application {
+    // Define the main class for the application.
+    mainClassName = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "IndexMain"
+    mainClass = "com.lucene.demo." + mainClassName
+}
