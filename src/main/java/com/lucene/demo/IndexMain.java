@@ -24,9 +24,9 @@ public class IndexMain {
         IndexWriter indexWriter = new IndexWriter(directory, new IndexWriterConfig(new StandardAnalyzer()));
 
         List<Person> personList = Arrays.asList(
-            new Person("id0", "조재구", 25),
-            new Person("id1", "우혜인", 23),
-            new Person("id2", "조재혁", 28)
+            new Person("id0", "조재구", "나는 사람입니다.", 25),
+            new Person("id1", "우혜인", "나는 사람입니다.", 23),
+            new Person("id2", "조재혁", "나는 사람입니다.", 28)
         );
         
         for (Person person : personList) {
@@ -34,6 +34,7 @@ public class IndexMain {
             Document document = new Document();
             document.add(new StringField("id", person.getId(), Field.Store.YES));
             document.add(new StringField("name", person.getName(), Field.Store.YES));
+            document.add(new StringField("description", person.getDescription(), Field.Store.YES));
             document.add(new LongPoint("age", person.getAge()));
             indexWriter.updateDocument(term, document);
         }

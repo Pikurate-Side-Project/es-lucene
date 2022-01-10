@@ -10,6 +10,7 @@ repositories {
 dependencies {
     implementation "org.apache.lucene:lucene-core:8.9.0"
     implementation "org.apache.lucene:lucene-analyzers-common:8.9.0"
+    testImplementation "junit:junit:4.+"
 }
 
 application {
