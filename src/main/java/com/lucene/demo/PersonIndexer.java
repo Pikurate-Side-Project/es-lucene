@@ -13,6 +13,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
@@ -44,10 +45,10 @@ public class PersonIndexer {
 
     public void addDocuments(List<Person> personList) throws IOException {
         for (Person person: personList) {
-            Term term = new Term("_id", person.getId());
+            Term term = new Term("id", person.getId());
             Document document = new Document();
             document.add(new StringField("id", person.getId(), Field.Store.YES));
-            document.add(new StringField("name", person.getName(), Field.Store.YES));
+            document.add(new TextField("name", person.getName(), Field.Store.YES));
             document.add(new StringField("description", person.getDescription(), Field.Store.YES));
             document.add(new LongPoint("age", person.getAge()));
             indexWriter.updateDocument(term, document);
